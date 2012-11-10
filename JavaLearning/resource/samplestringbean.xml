@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN/EN" 
+  "http://www.springframework.org/dtd/spring-beans.dtd"> 
+
+<beans> 
+	<bean id="helloBean" class="op.sample.spring.HelloBean"/>
+    <bean id="samplestringbean" class="op.sample.spring.SampleStringBean" autowire="byType"> 
+        <property name="prefix" value="Prefix_"/>
+        <property name="num" value="1"/>
+        <property name="hello">
+        	<ref bean="helloBean"/>
+        </property>
+        <property name="suffix">
+        	<list>
+        		<value>A</value>
+        		<value>B</value>
+        	</list>
+        </property>
+    </bean> 
+</beans>

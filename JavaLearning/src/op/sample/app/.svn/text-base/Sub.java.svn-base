@@ -1,0 +1,10 @@
+package op.sample.app;
+
+public class Sub extends Super{
+	public String subName;
+	
+	public Sub() {	subName = "Sub";	}
+	
+	public void setName(String _name)	{	subName = _name;	}
+	public String getName()	{	return subName;	}
+}

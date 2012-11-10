@@ -1,0 +1,31 @@
+package op.sample;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import org.springframework.context.support.FileSystemXmlApplicationContext;
+
+public class Executor {
+	public static void main(String[] args) throws IOException {
+//	    new FileSystemXmlApplicationContext("config/xml/batchbean-config.xml");
+//        System.out.println("啟動 Task..");
+//        System.out.println("請輸入 exit 關閉 Task: ");
+//        
+//        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+//        
+//        while(true) {
+//            if(reader.readLine().equals("exit")) {
+//                System.exit(0);
+//            }
+//        }
+	    try {
+	        System.out.println("Running the batch script");
+	        Runtime.getRuntime().exec("cmd /C start C:/SQLLDR/ETXT049.bat");
+	        System.out.println("Finished running the batch script");
+	    } catch (Exception e) {
+	        System.out.println("Error creating the FileInfo panel: " +  e);
+	    e.printStackTrace();
+	    }
+	}
+}

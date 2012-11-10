@@ -1,0 +1,8 @@
+package op.sample.app;
+
+public class Super {
+	private String name;
+	
+	public Super() {	name = "Super";	}	
+	public String getName()	{	return name;	}
+}
