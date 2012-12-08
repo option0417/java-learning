@@ -6,7 +6,7 @@ import org.springframework.context.ApplicationEvent;
 
 public class FirstEvent extends ApplicationEvent{
 	private String name;
-	private Date time;;
+	private Date time;
 	
 
 	public FirstEvent(Object source, String _name, Date _time) {
