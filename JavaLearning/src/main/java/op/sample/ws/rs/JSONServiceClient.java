@@ -1,4 +1,4 @@
-package op.sample.webservice.rs;
+package op.sample.ws.rs;
 
 import java.net.URI;
 import java.net.URISyntaxException;

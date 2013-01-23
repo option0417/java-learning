@@ -1,11 +1,11 @@
-package op.sample.webservice.rs.impl;
+package op.sample.ws.rs.impl;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 import op.sample.spring.domain.BitOrganizer;
 import op.sample.spring.service.IBitOrganizerService;
-import op.sample.webservice.rs.IJSONService;
+import op.sample.ws.rs.IJSONService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,9 +1,9 @@
-package op.sample.webservice.rs.impl;
+package op.sample.ws.rs.impl;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-import op.sample.webservice.rs.IUserRestService;
+import op.sample.ws.rs.IUserRestService;
 
 @Path("/users")
 public class UserRestService implements IUserRestService {

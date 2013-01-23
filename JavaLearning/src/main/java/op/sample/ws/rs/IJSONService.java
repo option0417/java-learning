@@ -1,4 +1,4 @@
-package op.sample.webservice.rs;
+package op.sample.ws.rs;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;

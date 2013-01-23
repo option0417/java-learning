@@ -2,7 +2,7 @@ package op.sample;
 
 import java.net.URI;
 
-import op.sample.webservice.rs.JSONServiceClient;
+import op.sample.ws.rs.JSONServiceClient;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
