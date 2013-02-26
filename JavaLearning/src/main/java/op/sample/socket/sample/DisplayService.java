@@ -1,4 +1,4 @@
-package op.sample.socket;
+package op.sample.socket.sample;
 
 import java.util.Scanner;
 
