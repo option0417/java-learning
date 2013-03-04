@@ -18,6 +18,59 @@
         http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
         
         <context:component-scan base-package="op.sample.spring.exception.*" />
+        
+        <tx:annotation-driven transaction-manager="transactionManager"/>
+        
+        <!-- Set Datasource 
+        <jee:jndi-lookup id="opDataSource" jndi-name="java:jboss/op/sample/db/MySQL"/>
+        <bean id="txManager" class="org.springframework.transaction.jta.JtaTransactionManager"/>
+
+		<bean id="opSessionFactory" class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		    <property name="dataSource" ref="opDataSource"/>
+		    <property name="packagesToScan" value="op.sample.spring.domain"/>
+    		<property name="hibernateProperties">
+    			<value>
+					hibernate.dialect=org.hibernate.dialect.MySQLDialect
+      			</value>
+    		</property>
+  		</bean>-->
+  		  		
+        <!-- Set TransactionManager 
+	    <bean id="transactionManager" class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+	        <property name="sessionFactory" ref="opSessionFactory"/>
+	    </bean>-->
+	    
+	    <!-- BeanName Aware Practice -->
+		<bean id="cashier" class="op.sample.spring.bean_aware.Cashier">
+			<property name="id" value="10001"/>
+		</bean>
+		
+		<!-- ExtResource Loader Practice -->
+		<bean id="banner" class="op.sample.spring.ext_resources.BannerLoader" init-method="showBanner"/>
+        
+        <!-- ApplicationEventPublisher/Listen Practice -->
+		<bean id="EventPublish" class="op.sample.spring.event.EventPublish">
+			<property name="Name" value="First Event"/>
+		</bean>
+		<bean class="op.sample.spring.event.EventListen"/>
+		
+		<!-- Static Factory Practice -->
+		<bean id="aaa" class="op.sample.spring.factory_method.ProductCreator"
+			factory-method="createProduct">
+			<constructor-arg value="aaa"/>
+		</bean>
+		
+		<!-- Bean Reference Practice -->
+		<bean id="RefBean" class="op.sample.spring.refbean.DataPrefixGenerator">
+			<property name="Pattern" value="yyyy/MM/dd"/>
+		</bean>		
+		<bean id="SequenceGenerator" class="op.sample.spring.refbean.SequenceGenerator">
+			<property name="suffix" value="_suffix"/>
+			<property name="PrefixGenerator">
+				<ref bean="RefBean"/>
+			</property>
+		</bean>
+        
 		
 		<aop:aspectj-autoproxy/>
 			
