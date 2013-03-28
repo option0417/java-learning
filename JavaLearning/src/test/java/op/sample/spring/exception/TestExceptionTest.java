@@ -1,3 +1,4 @@
+package op.sample.spring.exception;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import op.sample.spring.exception.TestException;
