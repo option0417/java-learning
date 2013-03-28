@@ -28,7 +28,7 @@
 		
 		<aop:config>
 			<aop:pointcut id="annotationPointcutForException"
-	  	 		expression="@annotation(op.sample.annotation.LogException)"/>
+	  	 		expression="@annotation(op.sample.spring.annotation.LogException)"/>
 	  	 </aop:config>
 		
 	    <bean id="exception" class="op.sample.spring.exception.LogThrowsExceptionAdviceImpl"/>

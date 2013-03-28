@@ -13,7 +13,7 @@ public class TestExceptionTest {
 	
 	@Before
 	public void setUp() throws Exception {
-		appContext = new ClassPathXmlApplicationContext("opSample-beans-config.xml");
+		appContext = new ClassPathXmlApplicationContext("test-opSample-beans-config.xml");
 	}
 
 	@Test
