@@ -1,112 +1,115 @@
 package op.sample;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.TimeZone;
 
-import op.sample.random.RandomGenerator;
-import op.sample.random.RandomThread;
-
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.xml.sax.Attributes;
-import org.xml.sax.helpers.DefaultHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
-public class Executor extends DefaultHandler {
-	private static final Logger LOG = LogManager.getLogger(Executor.class);
-	private static final List<String> xsdURIList = new ArrayList<String>();
-	public Executor() {
-		super();
-	}
+
+public class Executor {
+	private static final Logger LOG = LoggerFactory.getLogger(Executor.class);
+	private static final long MillisOfMinute = 60 * 1000L;
+	private static final long MillisOfHour = 60 * MillisOfMinute;
+	private static final long MillisOfDay = 24 * MillisOfHour;
+	private static final long MillisOfWeek = 7 * MillisOfDay;
 	
-	public static void main(String[] args) throws Exception {
-//		URL url = new URL("http://localhost:8080/mep-innser-service-stub/MEPInnerService?wsdl");
-//		URLConnection urlConnection = url.openConnection();
-//		
-//		InputStream is = urlConnection.getInputStream();
-//		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-//		int data = 0;
-//		
-//		while ((data = is.read()) != -1) {
-//			buffer.write(data);
-//		}
-//		is.close();
-//		ByteArrayInputStream bais = new ByteArrayInputStream(buffer.toByteArray());
-//		LOG.info(buffer.toString());
-//		buffer.close();
-//		
-//		Executor e = new Executor();
-//		XMLReader xr = XMLReaderFactory.createXMLReader();
-//		xr.setContentHandler(e);
-//		xr.setErrorHandler(e);
-//		xr.parse(new InputSource(bais));
-//		
-//		for (String s : e.getXSDURIList()) {
-//			LOG.info(getURLContent(new URL(s)));
-//		}
-		
-		final int range = 10;
-		RandomGenerator randomGenerator = new RandomGenerator();
-		randomGenerator.setNumberRange(range);
-		
-		RandomThread t1 = new RandomThread(1, randomGenerator);
-		RandomThread t2 = new RandomThread(2, randomGenerator);
-		RandomThread t3 = new RandomThread(3, randomGenerator);
-		
-		t1.start();
-		t2.start();
-		t3.start();
-		
-//		Random rand = new Random();
-//		for (int i = 0; i < 100; i++) {
-//			System.out.println(rand.nextInt(10));
-//		}
-	}
+	private static final boolean[] daySetting = new boolean[] {true, false, true, false, true, false, false};
+	private static final String StartTime = "1:30";
+	private static final String EndTime = "16:30";
 	
-	public static String getURLContent(URL url) throws IOException {
-		URLConnection urlConnection = url.openConnection();
+	public static void main(String[] args) {
+		LOG.debug("MillisOfMinute : {}", MillisOfMinute);
+		LOG.debug("MillisOfHour : {}", MillisOfHour);
+		LOG.debug("MillisOfDay : {}", MillisOfDay);
+		LOG.debug("MillisOfWeek : {}", MillisOfWeek);
 		
-		InputStream is = urlConnection.getInputStream();
-		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-		int data = 0;
+		long currTime = System.currentTimeMillis();
+		Date currDate = new Date(currTime);
+		SimpleDateFormat.getDateTimeInstance().format(currDate).toString();
+		LOG.debug("currTime : {}", currTime);
+		LOG.debug("currDate : {}", currDate);
+		LOG.debug("SimpleDateFormat : {}", new SimpleDateFormat("yyyy-MM-dd hh:mm:sss").format(currDate).toString());
 		
-		while ((data = is.read()) != -1) {
-			buffer.write(data);
+		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
+		calendar.setTimeInMillis(currTime);
+
+		LOG.debug("TimeZone : {}", calendar.getTimeZone().toString());
+		LOG.debug("getWeekYear : {}", calendar.getWeekYear());
+		LOG.debug("DAY_OF_WEEK : {}", calendar.get(Calendar.DAY_OF_WEEK));
+		LOG.debug("HOUR_OF_DAY : {}", calendar.get(Calendar.HOUR_OF_DAY));
+		LOG.debug("MINUTE : {}", calendar.get(Calendar.MINUTE));
+		
+		
+		if (daySetting[getDayOfWeek(calendar)]) {
+			LOG.debug("Found day");
+			
+			long[] settingTime = getSettingTime(StartTime, EndTime, calendar);
+			LOG.debug("StartTime: {}", settingTime[0]);
+			LOG.debug("EndTime: {}", settingTime[1]);
+			
+			if (settingTime[0] <= currTime && currTime <= settingTime[1]) {
+				LOG.debug("Mute");
+			} else {
+				LOG.debug("Not Mute");
+			}
 		}
-		is.close();
-		return buffer.toString("UTF8");
 	}
 	
-    public void startDocument () {
-    	System.out.println("Start document");
-    }
-
-    public void endDocument () {
-    	System.out.println("End document");
-    }
-    
-    public void startElement (String uri, String name, String qName, Attributes atts) {
-    	if ("import".equals(name)) {
-    		handleAtts(atts);
-    	}
+	private static int getDayOfWeek(Calendar calendar) {
+		switch(calendar.get(Calendar.DAY_OF_WEEK)) {
+			case Calendar.MONDAY:
+				return 0;
+			case Calendar.TUESDAY:
+				return 1;
+			case Calendar.WEDNESDAY:
+				return 2;
+			case Calendar.THURSDAY:
+				return 3;
+			case Calendar.FRIDAY:
+				return 4;
+			case Calendar.SATURDAY:
+				return 5;
+			case Calendar.SUNDAY:
+				return 6;
+			default:
+				return -1;
+		}
 	}
-    
-    private void handleAtts(Attributes atts) {
-    	for (int index = 0; index < atts.getLength(); index++) {
-    		if ("schemaLocation".equals(atts.getLocalName(index))) {
-    			xsdURIList.add(atts.getValue(index));
-    		}
-    	}
-    }
-    
-    public List<String> getXSDURIList() {
-    	return xsdURIList;
-    }
+	
+	private static long[] getSettingTime(String startTime, String endTime, Calendar currCalendar) {
+		long startTimestamp = getTimestamp(startTime, (Calendar)currCalendar.clone());		
+		long endTimestamp = getTimestamp(endTime, (Calendar)currCalendar.clone());
+		
+		if (startTimestamp <= endTimestamp) {
+			return new long[] {startTimestamp, endTimestamp};
+		} else {
+			endTimestamp = getLastTimeOfDay((Calendar)currCalendar.clone());
+			return new long[] {startTimestamp, endTimestamp};
+		}		
+	}
+	
+	private static long getTimestamp(String timeString, Calendar calendar) {
+		LOG.debug("=== getTimestamp ===");
+		
+		int hourOfDay = Integer.parseInt(timeString.split(":")[0]);
+		int minute = Integer.parseInt(timeString.split(":")[1]);
+		LOG.debug("hourOfDay :{}", hourOfDay);
+		LOG.debug("minute :{}", minute);
+		
+		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		calendar.set(Calendar.MINUTE, minute);		
+		return calendar.getTimeInMillis();
+	}
+	
+	private static long getLastTimeOfDay(Calendar currCalendar) {
+		LOG.debug("=== getLastTimeOfDay ===");
+		currCalendar.set(Calendar.HOUR_OF_DAY, 23);
+		currCalendar.set(Calendar.MINUTE, 59);		
+		return currCalendar.getTimeInMillis();
+	}
 }
 

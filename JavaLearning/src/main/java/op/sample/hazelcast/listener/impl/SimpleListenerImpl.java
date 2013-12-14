@@ -1,4 +1,4 @@
-package com.op.sample.hazelcast.listener.impl;
+package op.sample.hazelcast.listener.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.hazelcast.core.DistributedObject;
 import com.hazelcast.core.DistributedObjectEvent;
 import com.hazelcast.core.DistributedObjectListener;
-import com.op.sample.hazelcast.listener.SimpleListener;
+import op.sample.hazelcast.listener.SimpleListener;
 
 public class SimpleListenerImpl implements SimpleListener {
 	private Logger LOG = LoggerFactory.getLogger(getClass());

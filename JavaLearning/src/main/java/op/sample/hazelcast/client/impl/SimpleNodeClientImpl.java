@@ -1,4 +1,4 @@
-package com.op.sample.hazelcast.client.impl;
+package op.sample.hazelcast.client.impl;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +7,7 @@ import com.hazelcast.client.HazelcastClient;
 import com.hazelcast.client.config.ClientConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
-import com.op.sample.hazelcast.client.SimpleNodeClient;
+import op.sample.hazelcast.client.SimpleNodeClient;
 
 public class SimpleNodeClientImpl implements SimpleNodeClient {
 	private Logger LOG = LoggerFactory.getLogger(getClass());

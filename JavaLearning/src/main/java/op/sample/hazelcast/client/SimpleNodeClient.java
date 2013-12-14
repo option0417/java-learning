@@ -1,4 +1,4 @@
-package com.op.sample.hazelcast.client;
+package op.sample.hazelcast.client;
 
 public interface SimpleNodeClient {
 	/** Connect to SimpleNode */

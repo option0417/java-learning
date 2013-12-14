@@ -1,13 +1,13 @@
-package com.op.sample.hazelcast;
+package op.sample.hazelcast;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.core.IMap;
-import com.op.sample.hazelcast.listener.impl.SimpleListenerImpl;
-import com.op.sample.hazelcast.server.SimpleNode;
-import com.op.sample.hazelcast.server.impl.SimpleNodeImpl;
+import op.sample.hazelcast.listener.impl.SimpleListenerImpl;
+import op.sample.hazelcast.server.SimpleNode;
+import op.sample.hazelcast.server.impl.SimpleNodeImpl;
 
 public class Executor {
 	private static final Logger LOG = LoggerFactory.getLogger(Executor.class);

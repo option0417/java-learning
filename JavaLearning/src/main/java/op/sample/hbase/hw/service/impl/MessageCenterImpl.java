@@ -12,6 +12,7 @@ import org.apache.hadoop.hbase.client.HTable;
 import org.apache.hadoop.hbase.client.Result;
 
 public class MessageCenterImpl implements MessageCenter {
+	
 	public static void main(String[] args) {
 		MessageCenter messageCenter = new MessageCenterImpl();
 		messageCenter.listTimeline("");

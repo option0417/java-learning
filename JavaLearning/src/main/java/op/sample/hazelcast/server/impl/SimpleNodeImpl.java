@@ -1,4 +1,4 @@
-package com.op.sample.hazelcast.server.impl;
+package op.sample.hazelcast.server.impl;
 
 import java.util.Map;
 import java.util.Queue;
@@ -9,7 +9,7 @@ import org.slf4j.LoggerFactory;
 import com.hazelcast.config.Config;
 import com.hazelcast.core.Hazelcast;
 import com.hazelcast.core.HazelcastInstance;
-import com.op.sample.hazelcast.server.SimpleNode;
+import op.sample.hazelcast.server.SimpleNode;
 
 public class SimpleNodeImpl implements SimpleNode {
 	private Logger LOG = LoggerFactory.getLogger(getClass());

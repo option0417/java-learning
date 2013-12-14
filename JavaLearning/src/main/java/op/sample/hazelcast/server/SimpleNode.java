@@ -1,4 +1,4 @@
-package com.op.sample.hazelcast.server;
+package op.sample.hazelcast.server;
 
 import com.hazelcast.core.HazelcastInstance;
 

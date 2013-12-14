@@ -1,4 +1,4 @@
-package com.op.sample.hazelcast.listener;
+package op.sample.hazelcast.listener;
 
 import com.hazelcast.core.DistributedObjectListener;
 
