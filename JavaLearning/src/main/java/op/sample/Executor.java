@@ -22,41 +22,9 @@ public class Executor {
 	private static final String EndTime = "16:30";
 	
 	public static void main(String[] args) {
-		LOG.debug("MillisOfMinute : {}", MillisOfMinute);
-		LOG.debug("MillisOfHour : {}", MillisOfHour);
-		LOG.debug("MillisOfDay : {}", MillisOfDay);
-		LOG.debug("MillisOfWeek : {}", MillisOfWeek);
+		int radix = 1 << 1;
 		
-		long currTime = System.currentTimeMillis();
-		Date currDate = new Date(currTime);
-		SimpleDateFormat.getDateTimeInstance().format(currDate).toString();
-		LOG.debug("currTime : {}", currTime);
-		LOG.debug("currDate : {}", currDate);
-		LOG.debug("SimpleDateFormat : {}", new SimpleDateFormat("yyyy-MM-dd hh:mm:sss").format(currDate).toString());
-		
-		Calendar calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"));
-		calendar.setTimeInMillis(currTime);
-
-		LOG.debug("TimeZone : {}", calendar.getTimeZone().toString());
-		LOG.debug("getWeekYear : {}", calendar.getWeekYear());
-		LOG.debug("DAY_OF_WEEK : {}", calendar.get(Calendar.DAY_OF_WEEK));
-		LOG.debug("HOUR_OF_DAY : {}", calendar.get(Calendar.HOUR_OF_DAY));
-		LOG.debug("MINUTE : {}", calendar.get(Calendar.MINUTE));
-		
-		
-		if (daySetting[getDayOfWeek(calendar)]) {
-			LOG.debug("Found day");
-			
-			long[] settingTime = getSettingTime(StartTime, EndTime, calendar);
-			LOG.debug("StartTime: {}", settingTime[0]);
-			LOG.debug("EndTime: {}", settingTime[1]);
-			
-			if (settingTime[0] <= currTime && currTime <= settingTime[1]) {
-				LOG.debug("Mute");
-			} else {
-				LOG.debug("Not Mute");
-			}
-		}
+		System.out.println(String.valueOf(radix));
 	}
 	
 	private static int getDayOfWeek(Calendar calendar) {
