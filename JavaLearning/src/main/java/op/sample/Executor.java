@@ -1,9 +1,12 @@
 package op.sample;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.TimeZone;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import op.sample.hbase.hw.domain.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +25,18 @@ public class Executor {
 	private static final String EndTime = "16:30";
 	
 	public static void main(String[] args) {
-		int radix = 1 << 1;
-		
-		System.out.println(String.valueOf(radix));
+        User user = new User();
+        user.setUserID("fake-user_id-0001");
+        user.setTimelineID("fake-timeline_id-0001");
+        
+        
+        
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hbase_pu");
+        EntityManager em = emf.createEntityManager();
+        
+        em.persist(user);
+        em.close();
+        emf.close();
 	}
 	
 	private static int getDayOfWeek(Calendar calendar) {

@@ -1,7 +1,17 @@
 package op.sample.hbase.hw.domain;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "u", schema = "User@hbase_pu")
 public class User {
+	@Id
 	private String userID;
+	
+	@Column(name="timeline_id")
 	private String timelineID;
 	
 	

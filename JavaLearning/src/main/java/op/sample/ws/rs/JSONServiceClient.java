@@ -5,10 +5,10 @@ import java.net.URISyntaxException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.codehaus.jettison.json.JSONException;
 import org.codehaus.jettison.json.JSONObject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientHandlerException;
@@ -20,7 +20,7 @@ public class JSONServiceClient {
 	private static final String URL_PREFIX = "http://";
 	private static final String URL_DEF_HOST = "localhost:8080";
 	private static final String URL_DEF_TAGET = "/JavaLearning/rest/json/metallica/post";
-	private static final Logger LOG = LogManager.getLogger(JSONServiceClient.class);	
+	private static final Logger LOG = LoggerFactory.getLogger(JSONServiceClient.class);
 	private URI uri;
 	private JSONObject jsonObj;
 

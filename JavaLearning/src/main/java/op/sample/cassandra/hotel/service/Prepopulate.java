@@ -18,8 +18,8 @@ import org.apache.cassandra.thrift.ColumnParent;
 import org.apache.cassandra.thrift.ColumnPath;
 import org.apache.cassandra.thrift.Mutation;
 import org.apache.cassandra.thrift.SuperColumn;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Performs the initial population of the database. 
@@ -29,7 +29,7 @@ import org.apache.logging.log4j.Logger;
  * I am totally ignoring exceptions to save space.
  */
 public class Prepopulate {
-	private static final Logger LOG = LogManager.getLogger(Prepopulate.class);
+	private static final Logger LOG = LoggerFactory.getLogger(Prepopulate.class);
 	
 	
 	private Cassandra.Client client;
