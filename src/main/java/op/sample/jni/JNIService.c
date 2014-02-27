@@ -61,12 +61,12 @@ char* getJSONElement(const char*, const char*);
 
 JNIEXPORT void JNICALL Java_op_sample_jni_JNIServiceImpl_invokeJNI
 	(JNIEnv* jniEnv, jobject jObj1, jobjectArray jArray) {
-	printf("Start of C program\n");
+//	printf("Start of C program\n");
 
 	//getchar();
 
 	jsize len = (*jniEnv)->GetArrayLength(jniEnv, jArray);
-	printf("Size of Array: %d\n", len);
+//	printf("Size of Array: %d\n", len);
 
 
 	int index = 0;
@@ -105,7 +105,7 @@ const char* getJSONString(JNIEnv* jniEnv, jobject jObj) {
 		//printf("JSONFormat: %s\n", jsonElement);
 		charPtrHolder[holderIndex++] = jsonElement;
 	}
-
+/*
 	printf("{");
 	index = 0;
 	while (index < holderIndex) {
@@ -114,6 +114,7 @@ const char* getJSONString(JNIEnv* jniEnv, jobject jObj) {
 		index++;
 	}
 	printf("}\n");
+*/
 	return "";
 }
 
