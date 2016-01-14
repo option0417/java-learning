@@ -45,7 +45,7 @@ public class TreeCreator {
 	}
 	
 	private String getBranchText(int startIndex, int endIndex, String sourceString) {
-		
+		return "";
 	}
 	
 	private static TreeNode createTreeNode(String name) {
@@ -53,7 +53,7 @@ public class TreeCreator {
 	}
 	
 	private static void addToTree(TreeNode rootNode, TreeNode newNode) {
-		Iterator<Entry<String, TreeNode>> rootIter = rootNode.getSubTreeNodeMap().entrySet().iterator();
+		Iterator<Entry<String, TreeNode>> rootIter = rootNode.getSubNodeMap().entrySet().iterator();
 		
 		while (rootIter.hasNext()) {
 			Entry<String, TreeNode> entry = rootIter.next();			
@@ -62,8 +62,8 @@ public class TreeCreator {
 		
 		
 		
-		if (rootNode.getSubTreeNodeMap().get(newNode.getName()) == null) {
-			rootNode.getSubTreeNodeMap().put(newNode.getName(), newNode);
+		if (rootNode.getSubNodeMap().get(newNode.getName()) == null) {
+			rootNode.getSubNodeMap().put(newNode.getName(), newNode);
 		} else {
 			
 		}

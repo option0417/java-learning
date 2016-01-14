@@ -1,5 +1,7 @@
 package op.sample.jni;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,10 +48,15 @@ public class Executor {
 	
 	private static void showDataObj(List<DataObj> dataObjList) {
 		int index = 0;
-		FileOutputStream fos = new FileOutputStream(new Fl);
-		for (; index < dataObjList.size(); index++) {
-			dataObjList.get(index).toJson();
-			//System.out.println(dataObjList.get(index).toJson());
-		}
+        try {
+            FileOutputStream fos = new FileOutputStream(new File(""));
+
+            for (; index < dataObjList.size(); index++) {
+                dataObjList.get(index).toJson();
+                //System.out.println(dataObjList.get(index).toJson());
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 	}
 }

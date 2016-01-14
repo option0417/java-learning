@@ -204,15 +204,15 @@
 			<version>1.7.5</version>
 		</dependency>
 		<dependency>
-    <groupId>org.apache.logging.log4j</groupId>
-    <artifactId>log4j-core</artifactId>
-    <version>2.0-beta9</version>    
-</dependency>
-<dependency>
-    <groupId>log4j</groupId>
-    <artifactId>log4j</artifactId>
-    <version>1.2.17</version>
-</dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>2.0-beta9</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
 		<!-- Ant -->		
 		<dependency>
 		  <groupId>org.apache.ant</groupId>
@@ -225,6 +225,12 @@
 		  <artifactId>mysql-connector-java</artifactId>
 		  <version>5.1.22</version>
 		</dependency>
+        <!-- Apache Zooeeper -->
+        <dependency>
+            <groupId>org.apache.zookeeper</groupId>
+            <artifactId>zookeeper</artifactId>
+            <version>3.4.6</version>
+        </dependency>
 		<!-- JUnit -->
 		<dependency>
 		    <groupId>junit</groupId>

@@ -1,0 +1,12 @@
+.DS_Store
+.project
+.classpath
+*.swp
+.settings/
+target/
+*.iml
+*.log
+*.idea/
+out/
+bin/
+!**/**/libs/**/*.jar
