@@ -1,3 +1,3 @@
 JavaLearning
 ============
-Just For Java Learning
+Just for learning of java.
