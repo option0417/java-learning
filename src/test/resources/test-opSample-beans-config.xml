@@ -31,6 +31,6 @@
 	  	 		expression="@annotation(op.sample.spring.annotation.LogException)"/>
 	  	 </aop:config>
 		
-	    <bean id="exception" class="op.sample.spring.exception.LogThrowsExceptionAdviceImpl"/>
-	    <bean id="catch_exception" class="op.sample.spring.exception.LogMethodInterceptorImpl"/>
+	    <bean id="exception" class="tw.com.wd.spring.exception.LogThrowsExceptionAdviceImpl"/>
+	    <bean id="catch_exception" class="tw.com.wd.spring.exception.LogMethodInterceptorImpl"/>
 </beans>     

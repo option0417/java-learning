@@ -348,7 +348,7 @@
                         <index>false</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>op.sample.utils.FetchSIPAccount</mainClass>
+                            <mainClass>tw.com.wd.utils.FetchSIPAccount</mainClass>
                             <classpathPrefix>libs/</classpathPrefix>
                         </manifest>
                     </archive>

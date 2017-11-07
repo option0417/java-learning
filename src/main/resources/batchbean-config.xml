@@ -10,12 +10,12 @@
         
     <bean id="jobDetailBean" class="org.springframework.scheduling.quartz.JobDetailBean">
         <property name="jobClass">
-            <value>op.sample.batch.SampleJob</value>
+            <value>tw.com.wd.batch.SampleJob</value>
         </property> 
         <property name="jobDataAsMap">
             <map>
                 <entry key="jobDetail">
-                    <value>op.sample.batch.JobDetail</value>
+                    <value>tw.com.wd.batch.JobDetail</value>
                 </entry>
             </map>
         </property>              

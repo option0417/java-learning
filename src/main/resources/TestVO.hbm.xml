@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
  
 <hibernate-mapping>
-  <class name="op.sample.hibernate.TestVO" table="test">
+  <class name="tw.com.wd.hibernate.TestVO" table="test">
  
     <id name="tbid" column="tbid">
       <generator class="native" />

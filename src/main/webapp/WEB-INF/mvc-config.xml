@@ -20,7 +20,7 @@
 	    </bean>
 	    
 	    <bean name="/BitOrganizer.do" 
-	          class="op.sample.spring.web.controller.BitOrganizerController"> 
+	          class="tw.com.wd.spring.web.controller.BitOrganizerController">
 	        <property name="viewPage"> 
 	            <value>BitOrganizer</value> 
 	        </property>

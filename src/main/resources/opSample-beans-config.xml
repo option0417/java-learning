@@ -41,30 +41,30 @@
 	    </bean>-->
 	    
 	    <!-- BeanName Aware Practice -->
-		<bean id="cashier" class="op.sample.spring.bean_aware.Cashier">
+		<bean id="cashier" class="tw.com.wd.spring.bean_aware.Cashier">
 			<property name="id" value="10001"/>
 		</bean>
 		
 		<!-- ExtResource Loader Practice -->
-		<bean id="banner" class="op.sample.spring.ext_resources.BannerLoader" init-method="showBanner"/>
+		<bean id="banner" class="tw.com.wd.spring.ext_resources.BannerLoader" init-method="showBanner"/>
         
         <!-- ApplicationEventPublisher/Listen Practice -->
-		<bean id="EventPublish" class="op.sample.spring.event.EventPublish">
+		<bean id="EventPublish" class="tw.com.wd.spring.event.EventPublish">
 			<property name="Name" value="First Event"/>
 		</bean>
-		<bean class="op.sample.spring.event.EventListen"/>
+		<bean class="tw.com.wd.spring.event.EventListen"/>
 		
 		<!-- Static Factory Practice -->
-		<bean id="aaa" class="op.sample.spring.factory_method.ProductCreator"
+		<bean id="aaa" class="tw.com.wd.spring.factory_method.ProductCreator"
 			factory-method="createProduct">
 			<constructor-arg value="aaa"/>
 		</bean>
 		
 		<!-- Bean Reference Practice -->
-		<bean id="RefBean" class="op.sample.spring.refbean.DataPrefixGenerator">
+		<bean id="RefBean" class="tw.com.wd.spring.refbean.DataPrefixGenerator">
 			<property name="Pattern" value="yyyy/MM/dd"/>
 		</bean>		
-		<bean id="SequenceGenerator" class="op.sample.spring.refbean.SequenceGenerator">
+		<bean id="SequenceGenerator" class="tw.com.wd.spring.refbean.SequenceGenerator">
 			<property name="suffix" value="_suffix"/>
 			<property name="PrefixGenerator">
 				<ref bean="RefBean"/>
@@ -84,6 +84,6 @@
 	  	 		expression="@annotation(op.sample.spring.annotation.LogException)"/>
 	  	 </aop:config>
 		
-	    <bean id="exception" class="op.sample.spring.exception.LogThrowsExceptionAdviceImpl"/>
-	    <bean id="catch_exception" class="op.sample.spring.exception.LogMethodInterceptorImpl"/>
+	    <bean id="exception" class="tw.com.wd.spring.exception.LogThrowsExceptionAdviceImpl"/>
+	    <bean id="catch_exception" class="tw.com.wd.spring.exception.LogMethodInterceptorImpl"/>
 </beans>     
