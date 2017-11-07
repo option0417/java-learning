@@ -348,7 +348,7 @@
                         <index>false</index>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>op.sample.others.FetchSIPAccount</mainClass>
+                            <mainClass>op.sample.utils.FetchSIPAccount</mainClass>
                             <classpathPrefix>libs/</classpathPrefix>
                         </manifest>
                     </archive>

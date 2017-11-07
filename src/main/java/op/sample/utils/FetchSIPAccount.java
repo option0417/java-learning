@@ -1,4 +1,4 @@
-package op.sample.others;
+package op.sample.utils;
 
 
 import org.apache.commons.codec.binary.Hex;
@@ -13,6 +13,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class FetchSIPAccount {
     private static final String PREFIX_JSON = "{\"CS210";
@@ -39,35 +41,29 @@ public class FetchSIPAccount {
     };
 
     public static void main(String[] args) throws Exception {
-        String ip = null;
-        if (args != null && args.length > 0) {
-            ip = args[0];
-        }else {
-            ip = "210.65.40.15";
+        if (args == null || args.length == 0) {
+            System.out.printf("No CS210 address.");
+            return;
         }
+
+        String[] cs210Addreses  = args[0].split(",");
+        List<String> sipResults = new ArrayList<String>();
 
         // https://<ip>:5088/json_3IM_getCS210account.php
         String protocol = "https://";
         String port     = ":5088";
         String path      = "/json_3IM_getCS210account.php";
 
-        FetchSIPAccount fetchSIPAccount = new FetchSIPAccount();
+        for (String cs210Address : cs210Addreses) {
+            FetchSIPAccount fetchSIPAccount = new FetchSIPAccount();
 
-        String sipJSON = fetchSIPAccount.fetchSIPAccountJSON(protocol + ip + port + path);
-        if (fetchSIPAccount.isValidSIPJSON(sipJSON)) {
-            FileOutputStream fos = null;
-            try {
-                fos = new FileOutputStream(new File("./sip.json"));
-                fos.write(sipJSON.getBytes(Charset.forName("UTF-8")));
-                fos.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } finally {
-                if (fos != null) {
-                    fos.close();
-                }
+            String sipJSON = fetchSIPAccount.fetchSIPAccountJSON(protocol + cs210Address + port + path);
+            if (fetchSIPAccount.isValidSIPJSON(sipJSON)) {
+                sipResults.add(sipJSON);
             }
         }
+
+        writeToFile(sipResults.toArray(new String[sipResults.size()]));
     }
 
     private String fetchSIPAccountJSON(String url) {
@@ -191,6 +187,29 @@ public class FetchSIPAccount {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private static void writeToFile(String... sipJSONs) {
+        FileOutputStream fos = null;
+
+        for (int cnt = 0; cnt < sipJSONs.length; cnt++) {
+            String sipJSON = sipJSONs[cnt];
+
+            try {
+                fos = new FileOutputStream(new File("./sip" + cnt + ".json"));
+                fos.write(sipJSON.getBytes(Charset.forName("UTF-8")));
+            } catch (IOException e) {
+                e.printStackTrace();
+            } finally {
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
         }
     }
 }

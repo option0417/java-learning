@@ -1,15 +1,10 @@
 package op.sample;
 
-import java.util.Calendar;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-import op.sample.hbase.hw.domain.User;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Arrays;
+import java.util.Calendar;
 
 
 
@@ -20,24 +15,35 @@ public class Executor {
 	private static final long MillisOfDay = 24 * MillisOfHour;
 	private static final long MillisOfWeek = 7 * MillisOfDay;
 	
-	private static final boolean[] daySetting = new boolean[] {true, false, true, false, true, false, false};
+	public static final boolean[] daySetting = new boolean[] {true, false, true, false, true, false, false};
 	private static final String StartTime = "1:30";
 	private static final String EndTime = "16:30";
 	
 	public static void main(String[] args) {
-        User user = new User();
-        user.setUserID("fake-user_id-0001");
-        user.setTimelineID("fake-timeline_id-0001");
-        
-        
-        
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hbase_pu");
-        EntityManager em = emf.createEntityManager();
-        
-        em.persist(user);
-        em.close();
-        emf.close();
+        final String[] texts = new String[] {"a", "b", "c", "d", "e"};
+
+
+        for (int idx = 0; idx < texts.length; idx++) {
+            System.out.printf(" %s ", texts[idx]);
+        }
+        System.out.printf("%n");
+
+        new Executor().setArray(texts);
+
+
+        for (int idx = 0; idx < texts.length; idx++) {
+            System.out.printf(" %s ", texts[idx]);
+        }
+        System.out.printf("%n");
 	}
+
+	private void setArray(final String[] sArray) {
+        String[] tmpArray = Arrays.copyOf(sArray, sArray.length);
+
+        for (int idx = 0; idx < tmpArray.length; idx++) {
+            tmpArray[idx] = new String(new byte[]{(byte)(65 + idx)});
+        }
+    }
 	
 	private static int getDayOfWeek(Calendar calendar) {
 		switch(calendar.get(Calendar.DAY_OF_WEEK)) {
