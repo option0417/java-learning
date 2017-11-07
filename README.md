@@ -1,3 +1,3 @@
-JavaLearning
+java-learning
 ============
-Just for learning of java.
+Just a project for java example.
