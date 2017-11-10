@@ -1,6 +1,6 @@
 package tw.com.wd.concurrent;
 
-public class MyInfoHanlder {
+public class MyInfoHandler {
 	private static volatile Integer cnt = 0;
 	private static final String[] TEXT_ARRAY = new String[10000];
 	
@@ -20,8 +20,8 @@ public class MyInfoHanlder {
 		MyInfoHolder.setMyInfo(myInfo);
 
 
-			synchronized (MyInfoHanlder.class) {
-				System.out.printf("MyInfoHanlder count: %d, %s, %d\n", cnt, TEXT_ARRAY[cnt], TEXT_ARRAY[cnt].length());
+			synchronized (MyInfoHandler.class) {
+				System.out.printf("MyInfoHandler count: %d, %s, %d\n", cnt, TEXT_ARRAY[cnt], TEXT_ARRAY[cnt].length());
 				TEXT_ARRAY[cnt] = null;
 				cnt++;
 			}

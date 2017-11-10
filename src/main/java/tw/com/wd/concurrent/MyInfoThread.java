@@ -17,7 +17,7 @@ public class MyInfoThread implements Callable<MyInfo> {
 		MyInfoHolder.setMyInfo(myInfo);
 		
 		try {
-			MyInfoHanlder.handleMyInfo();
+			MyInfoHandler.handleMyInfo();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.printf("Thread: %s, %d  Exception occured\n", this.name, this.count);
