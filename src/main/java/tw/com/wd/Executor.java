@@ -1,101 +1,52 @@
 package tw.com.wd;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import tw.com.wd.obj.AObj;
+import tw.com.wd.obj.BObj;
 
-import java.util.Arrays;
-import java.util.Calendar;
-
-
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 public class Executor {
-	private static final Logger LOG = LoggerFactory.getLogger(Executor.class);
-	private static final long MillisOfMinute = 60 * 1000L;
-	private static final long MillisOfHour = 60 * MillisOfMinute;
-	private static final long MillisOfDay = 24 * MillisOfHour;
-	private static final long MillisOfWeek = 7 * MillisOfDay;
-	
-	public static final boolean[] daySetting = new boolean[] {true, false, true, false, true, false, false};
-	private static final String StartTime = "1:30";
-	private static final String EndTime = "16:30";
-	
-	public static void main(String[] args) {
-        final String[] texts = new String[] {"a", "b", "c", "d", "e"};
+
+	public static void main(String[] args) throws Throwable {
+        AObj a = new AObj();
+        a.setId(1);
+        a.setName("NameA");
+
+        BObj b = new BObj();
+        b.setId(2);
+        b.setName("NameB");
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutputStream oos = new ObjectOutputStream(bos);
 
 
-        for (int idx = 0; idx < texts.length; idx++) {
-            System.out.printf(" %s ", texts[idx]);
-        }
-        System.out.printf("%n");
+        System.out.printf("Size: %d\n", bos.size());
 
-        new Executor().setArray(texts);
+        oos.writeObject(b);
+        oos.close();
+        bos.close();
+
+        System.out.printf("Size: %d\n", bos.size());
 
 
-        for (int idx = 0; idx < texts.length; idx++) {
-            System.out.printf(" %s ", texts[idx]);
-        }
-        System.out.printf("%n");
-	}
+        byte[] objBytes = bos.toByteArray();
 
-	private void setArray(final String[] sArray) {
-        String[] tmpArray = Arrays.copyOf(sArray, sArray.length);
+        ByteArrayInputStream bis = new ByteArrayInputStream(objBytes);
+        ObjectInputStream ois = new ObjectInputStream(bis);
 
-        for (int idx = 0; idx < tmpArray.length; idx++) {
-            tmpArray[idx] = new String(new byte[]{(byte)(65 + idx)});
-        }
-    }
-	
-	private static int getDayOfWeek(Calendar calendar) {
-		switch(calendar.get(Calendar.DAY_OF_WEEK)) {
-			case Calendar.MONDAY:
-				return 0;
-			case Calendar.TUESDAY:
-				return 1;
-			case Calendar.WEDNESDAY:
-				return 2;
-			case Calendar.THURSDAY:
-				return 3;
-			case Calendar.FRIDAY:
-				return 4;
-			case Calendar.SATURDAY:
-				return 5;
-			case Calendar.SUNDAY:
-				return 6;
-			default:
-				return -1;
-		}
-	}
-	
-	private static long[] getSettingTime(String startTime, String endTime, Calendar currCalendar) {
-		long startTimestamp = getTimestamp(startTime, (Calendar)currCalendar.clone());		
-		long endTimestamp = getTimestamp(endTime, (Calendar)currCalendar.clone());
-		
-		if (startTimestamp <= endTimestamp) {
-			return new long[] {startTimestamp, endTimestamp};
-		} else {
-			endTimestamp = getLastTimeOfDay((Calendar)currCalendar.clone());
-			return new long[] {startTimestamp, endTimestamp};
-		}		
-	}
-	
-	private static long getTimestamp(String timeString, Calendar calendar) {
-		LOG.debug("=== getTimestamp ===");
-		
-		int hourOfDay = Integer.parseInt(timeString.split(":")[0]);
-		int minute = Integer.parseInt(timeString.split(":")[1]);
-		LOG.debug("hourOfDay :{}", hourOfDay);
-		LOG.debug("minute :{}", minute);
-		
-		calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
-		calendar.set(Calendar.MINUTE, minute);		
-		return calendar.getTimeInMillis();
-	}
-	
-	private static long getLastTimeOfDay(Calendar currCalendar) {
-		LOG.debug("=== getLastTimeOfDay ===");
-		currCalendar.set(Calendar.HOUR_OF_DAY, 23);
-		currCalendar.set(Calendar.MINUTE, 59);		
-		return currCalendar.getTimeInMillis();
+        Object obj = ois.readObject();
+
+        System.out.printf("Class: %s\n", obj.getClass());
+
+        BObj bb = (BObj) obj;
+
+        System.out.println(bb.getId());
+        System.out.println(bb.getName());
+        System.out.println(bb.getaObj().getId());
+        System.out.println(bb.getaObj().getName());
 	}
 }
 

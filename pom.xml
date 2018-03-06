@@ -9,7 +9,7 @@
   
 	<properties>
 	   <spring.verion>3.2.0.RELEASE</spring.verion>
-		<java.version>1.6</java.version>
+		<java.version>1.7</java.version>
 	   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
   
@@ -238,6 +238,14 @@
 		    <version>4.11</version>
 		    <scope>test</scope>
 		</dependency>
+
+
+        <!-- AWS SDK for Java -->
+        <dependency>
+            <groupId>com.amazonaws</groupId>
+            <artifactId>aws-java-sdk</artifactId>
+            <version>1.6.12</version>
+        </dependency>
 	</dependencies>
   
 	<build>
@@ -247,8 +255,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
-					<source>${java.version}</source>
-					<target>${java.version}</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<showDeprecation>true</showDeprecation>
 					<showWarnings>true</showWarnings>
                     <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
