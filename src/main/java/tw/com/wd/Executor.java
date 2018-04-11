@@ -1,52 +1,25 @@
 package tw.com.wd;
 
-import tw.com.wd.obj.AObj;
-import tw.com.wd.obj.BObj;
-
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
 public class Executor {
 
 	public static void main(String[] args) throws Throwable {
-        AObj a = new AObj();
-        a.setId(1);
-        a.setName("NameA");
+	    byte[] b = toBytes(-1);
 
-        BObj b = new BObj();
-        b.setId(2);
-        b.setName("NameB");
-
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-
-
-        System.out.printf("Size: %d\n", bos.size());
-
-        oos.writeObject(b);
-        oos.close();
-        bos.close();
-
-        System.out.printf("Size: %d\n", bos.size());
-
-
-        byte[] objBytes = bos.toByteArray();
-
-        ByteArrayInputStream bis = new ByteArrayInputStream(objBytes);
-        ObjectInputStream ois = new ObjectInputStream(bis);
-
-        Object obj = ois.readObject();
-
-        System.out.printf("Class: %s\n", obj.getClass());
-
-        BObj bb = (BObj) obj;
-
-        System.out.println(bb.getId());
-        System.out.println(bb.getName());
-        System.out.println(bb.getaObj().getId());
-        System.out.println(bb.getaObj().getName());
+        System.out.printf("Length: %d\n", b.length);
+        System.out.printf("1: %d\n", (int) (b[0] & 0xFF));
+        System.out.printf("2: %d\n", (int) (b[1] & 0xFF));
+        System.out.printf("3: %d\n", (int) (b[2] & 0xFF));
+        System.out.printf("4: %d\n", (int) (b[3] & 0xFF));
 	}
+
+    public static byte[] toBytes(int val) {
+        byte [] b = new byte[4];
+        for(int i = 3; i > 0; i--) {
+            b[i] = (byte) val;
+            val >>>= 8;
+        }
+        b[0] = (byte) val;
+        return b;
+    }
 }
 
