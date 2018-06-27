@@ -258,6 +258,13 @@
             <version>4.1.23.Final</version>
         </dependency>
 
+        <!-- QCM -->
+        <dependency>
+            <groupId>com.mitake.o.o-libs</groupId>
+            <artifactId>qcm</artifactId>
+            <version>2.1</version>
+        </dependency>
+
 
 		<!-- JUnit -->
 		<dependency>
@@ -409,5 +416,11 @@
             <name>Maven US Central Repository.</name>
             <url>http://repo.maven.apache.org/maven2</url>
 	    </repository>
+
+        <repository>
+            <id>local.project</id>
+            <name>mitake</name>
+            <url>file:${project.basedir}/libs</url>
+        </repository>
 	</repositories>  
 </project>
