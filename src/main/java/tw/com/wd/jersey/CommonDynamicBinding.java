@@ -1,7 +1,7 @@
 package tw.com.wd.jersey;
 
 
-import tw.wd.api.rest.filter.req.RandomNumReqFilter;
+import tw.com.wd.jersey.filter.req.RandomNumReqFilter;
 
 import javax.ws.rs.container.ContainerRequestFilter;
 import javax.ws.rs.container.DynamicFeature;

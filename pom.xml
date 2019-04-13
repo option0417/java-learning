@@ -243,12 +243,12 @@
             <version>1.6.12</version>
         </dependency>
 
-        <!-- Netty -->
-        <dependency>
-            <groupId>io.netty</groupId>
-            <artifactId>netty-all</artifactId>
-            <version>4.1.23.Final</version>
-        </dependency>
+		<!-- Netty -->
+		<dependency>
+			<groupId>io.netty</groupId>
+			<artifactId>netty-all</artifactId>
+			<version>4.1.33.Final</version>
+		</dependency>
 
         <!-- QCM -->
         <dependency>
@@ -257,6 +257,12 @@
             <version>2.1</version>
         </dependency>
 
+		<!-- MapDB -->
+		<dependency>
+			<groupId>org.mapdb</groupId>
+			<artifactId>mapdb</artifactId>
+			<version>3.0.5</version>
+		</dependency>
 
 		<!-- JUnit -->
 		<dependency>

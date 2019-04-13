@@ -4,12 +4,12 @@ import org.glassfish.grizzly.http.server.HttpServer;
 import org.glassfish.jersey.grizzly2.httpserver.GrizzlyHttpServerFactory;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.ServerProperties;
-import tw.wd.api.rest.api.HelloImpl;
-import tw.wd.api.rest.filter.req.CounterReqFilter;
-import tw.wd.api.rest.filter.req.ShowReqFilter;
-import tw.wd.api.rest.interceptor.read.AppendNumberReadInterceptor;
-import tw.wd.api.rest.interceptor.read.AppendTextReadInterceptor;
-import tw.wd.api.rest.interceptor.write.AppendTextWriteInterceptor;
+import tw.com.wd.jersey.api.HelloImpl;
+import tw.com.wd.jersey.filter.req.CounterReqFilter;
+import tw.com.wd.jersey.filter.req.ShowReqFilter;
+import tw.com.wd.jersey.interceptor.read.AppendNumberReadInterceptor;
+import tw.com.wd.jersey.interceptor.read.AppendTextReadInterceptor;
+import tw.com.wd.jersey.interceptor.write.AppendTextWriteInterceptor;
 
 import javax.ws.rs.core.Application;
 import java.io.IOException;

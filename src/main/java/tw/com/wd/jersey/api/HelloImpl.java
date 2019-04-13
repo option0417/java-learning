@@ -1,6 +1,6 @@
 package tw.com.wd.jersey.api;
 
-import tw.wd.api.rest.Random;
+import tw.com.wd.jersey.Random;
 
 import javax.ws.rs.core.HttpHeaders;
 import javax.ws.rs.core.Response;

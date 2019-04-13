@@ -22,14 +22,14 @@ public class BookService {
     }
 
     boolean createBook(String body) {
-        return null;
+        return false;
     }
 
     boolean updateBook(String bookId, String body) {
-        return null;
+        return false;
     }
 
     boolean deleteBook(String bookID) {
-        return null;
+        return false;
     }
 }

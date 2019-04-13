@@ -1,7 +1,7 @@
 package tw.com.wd.jersey.api;
 
 
-import tw.wd.api.rest.service.BookType;
+import tw.com.wd.jersey.service.BookType;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
