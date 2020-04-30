@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain>
+    <user>
+        <id>uid001</id>
+        <name>option0417</name>
+        <bdate>1981/04/17</bdate>
+        <phone>0912345678</phone>
+        <address>Banqiao district, New Taipei City, Taiwan ROC</address>
+    </user>
+    <user>
+        <id>uid001</id>
+        <name>tingiwu</name>
+        <bdate>1985/09/08</bdate>
+        <phone>0987654321</phone>
+        <address>Xiaogang district, Kaohsiung City, Taiwan ROC</address>
+    </user>
+</domain>

@@ -1,84 +1,106 @@
 package tw.com.wd;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
-import java.nio.charset.Charset;
+
+import com.google.gson.GsonBuilder;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 
 public class Executor {
+    public static void main(String[] args) {
+        Domain domain = new Domain();
 
+        domain.setS("<p>test</p>?q=123");
+        //domain.setD(1.23f);
+        //domain.setI(456);
+        //domain.setL(789L);
+        domain.setSs(new String[] {"A", "B", "C"});
 
-    public static void main(String[] args) throws Exception {
-        String bom = readFromFile();
-        String bomText1 = "\uEFBB" + "\uBF00" + "{CS210";
-        String bomText2 = "\uFEFF{CS210";
-        String bomText3 = "\uFFFE{CS210";
-        String text = "{CS210";
+        List<String> sList = new ArrayList<>();
+        sList.add("Q");
+        sList.add("W");
+        sList.add("E");
+        domain.setsList(sList);
 
-        char[] UTF8_BOM      = {0xEF, 0xBB, 0xBF};
-        char[] UTF16_BE_BOM  = {0xFE, 0xFF};
-        char[] UTF16_LE_BOM  = {0xFF, 0xFE};
+        Map<String, String> sMap = new HashMap<>();
+        sMap.put("K1", "V1");
+        sMap.put("K2", "V2");
+        sMap.put("K3", "V3");
+        domain.setsMap(sMap);
 
-        System.out.printf("Text: %s\n", removeBOM(bom));
-        //System.out.printf("Text: %s\n", removeBOM(bomText2));
-        //System.out.printf("Text: %s\n", removeBOM(bomText3));
-        //System.out.printf("Text: %s\n", removeBOM(text));
+        System.out.println(new GsonBuilder().create().toJson(domain));
+        System.out.println(new GsonBuilder().disableHtmlEscaping().create().toJson(domain));
+        System.out.println(new GsonBuilder().disableHtmlEscaping().create().toJson(domain));
+        System.out.println(new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(domain));
+        System.out.println(new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(domain));
     }
 
-    private static String readFromFile() {
-        try {
-            FileInputStream fis = new FileInputStream(new File("/Users/weide_su/Dev/testing/test.log"));
-            StringBuilder responseBuilder   = new StringBuilder(30000);
-            int charInt                     = -1;
+    public static class Domain {
+        private String s;
+        private Long l;
+        private Integer i;
+        private Double d;
+        private String[] ss;
+        private List<String> sList;
+        private Map<String, String> sMap;
 
-            InputStreamReader is = new InputStreamReader(fis, "UTF-8");
-
-            while ( (charInt = is.read()) != -1) {
-                char ch = (char) charInt;
-                responseBuilder.append(ch);
-            }
-            fis.close();
-            return responseBuilder.toString();
-        } catch (Throwable t) {
-            t.printStackTrace();
-            return null;
+        public String getS() {
+            return s;
         }
-    }
 
-
-    private static String removeBOM(String responseJSON) throws UnsupportedEncodingException {
-        System.out.printf("Text: %s\n", responseJSON);
-        byte[] UTF8_BOM     = new byte[]{(byte)0xEF, (byte)0xBB, (byte)0xBF};
-        char UTF16_BE_BOM   = '\uFEFF';
-        char UTF16_LE_BOM   = '\uFFFE';
-
-        if(responseJSON.charAt(0) == UTF16_BE_BOM) {
-            responseJSON = responseJSON.substring(1);
-        } else if(responseJSON.charAt(0) == UTF16_LE_BOM) {
-            responseJSON = responseJSON.substring(1);
-        } else {
-            byte[] jsonBytes = responseJSON.getBytes(Charset.forName("UTF-8"));
-
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[0] & 0xFF));
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[1] & 0xFF));
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[2] & 0xFF));
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[3] & 0xFF));
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[4] & 0xFF));
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[5] & 0xFF));
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[6] & 0xFF));
-            System.out.printf("byte: %s\n", Integer.toHexString(jsonBytes[7] & 0xFF));
-            responseJSON = new String(jsonBytes);
-
-            if (    jsonBytes[0] == UTF8_BOM[0] &&
-                    jsonBytes[1] == UTF8_BOM[1] &&
-                    jsonBytes[2] == UTF8_BOM[2]) {
-                System.out.printf("UTF8_BOM\n");
-                byte[] newJSONBytes = new byte[jsonBytes.length-3];
-                System.arraycopy(jsonBytes, 2, newJSONBytes, 0, jsonBytes.length-3);
-            }
+        public void setS(String s) {
+            this.s = s;
         }
-        return responseJSON;
+
+        public long getL() {
+            return l;
+        }
+
+        public void setL(long l) {
+            this.l = l;
+        }
+
+        public int getI() {
+            return i;
+        }
+
+        public void setI(int i) {
+            this.i = i;
+        }
+
+        public double getD() {
+            return d;
+        }
+
+        public void setD(double d) {
+            this.d = d;
+        }
+
+        public String[] getSs() {
+            return ss;
+        }
+
+        public void setSs(String[] ss) {
+            this.ss = ss;
+        }
+
+        public List<String> getsList() {
+            return sList;
+        }
+
+        public void setsList(List<String> sList) {
+            this.sList = sList;
+        }
+
+        public Map<String, String> getsMap() {
+            return sMap;
+        }
+
+        public void setsMap(Map<String, String> sMap) {
+            this.sMap = sMap;
+        }
     }
 }
-

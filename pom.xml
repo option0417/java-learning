@@ -1,328 +1,76 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>tw.com.wd</groupId>
-    <artifactId>java-learning</artifactId>
+    <groupId>JavaLearning</groupId>
+    <artifactId>JavaLearning</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
-  
-	<properties>
-	   <spring.verion>5.1.6.RELEASE</spring.verion>
-		<jersey-version>2.27</jersey-version>
-		<java.version>1.7</java.version>
-	   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-	</properties>
-  
-	<dependencies>
-        <!-- Spring Framework -->
+
+    <properties>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <dependencies>
+        <!-- Jersey Container Grizzly2 -->
         <dependency>
-	        <groupId>org.springframework</groupId>
-	        <artifactId>spring-context</artifactId>
-	        <version>${spring.verion}</version>
+            <groupId>org.glassfish.jersey.containers</groupId>
+            <artifactId>jersey-container-grizzly2-http</artifactId>
+            <version>2.27</version>
         </dependency>
+
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-web</artifactId>
-            <version>${spring.verion}</version>
+            <groupId>org.glassfish.jersey.inject</groupId>
+            <artifactId>jersey-hk2</artifactId>
+            <version>2.27</version>
         </dependency>
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-webmvc</artifactId>
-		    <version>${spring.verion}</version>
-		</dependency>		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-core</artifactId>
-			<version>${spring.verion}</version>
-		</dependency>		
-		<dependency>
-		    <groupId>org.springframework</groupId>
-		    <artifactId>spring-orm</artifactId>
-		    <version>${spring.verion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aop</artifactId>
-			<version>${spring.verion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-aspects</artifactId>
-			<version>${spring.verion}</version>
-		</dependency>
 
-		<!-- QuartzJobBean in spring-context-support.jar -->		
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${spring.verion}</version>
-		</dependency>
-
-		<!-- Spring + Quartz need transaction -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-			<version>${spring.verion}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.verion}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<!-- Quartz Framework -->
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>1.8.6</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sf.jasperreports</groupId>
-			<artifactId>jasperreports</artifactId>
-			<version>5.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.cassandra</groupId>
-			<artifactId>cassandra-thrift</artifactId>
-			<version>1.1.6</version>
-		</dependency>
-
-        <!-- Hadoop -->
-		<dependency>
-		    <groupId>org.apache.hadoop</groupId>
-		    <artifactId>hadoop-common</artifactId>
-		    <version>2.2.0</version>
-		</dependency>
-
-		<!-- Hazelcast -->
-		<dependency>
-		    <groupId>com.hazelcast</groupId>
-		    <artifactId>hazelcast-all</artifactId>
-		    <version>3.1.3</version>
-		</dependency>
-
-		<!-- Hbase -->
-		<dependency>
-		    <groupId>org.apache.hbase</groupId>
-		    <artifactId>hbase-server</artifactId>
-		    <version>0.96.0-hadoop2</version>
-		</dependency>        
-		<dependency>
-		    <groupId>org.apache.hbase</groupId>
-		    <artifactId>hbase-client</artifactId>
-		    <version>0.96.0-hadoop2</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.hbase</groupId>
-		    <artifactId>hbase-protocol</artifactId>
-		    <version>0.96.0-hadoop2</version>
-		</dependency>
-		<dependency>
-		    <groupId>org.apache.hbase</groupId>
-		    <artifactId>hbase-common</artifactId>
-		    <version>0.96.0-hadoop2</version>
-		</dependency>
-
-		<!-- Hibernate Framework -->
-		<dependency>
-			<groupId>org.hibernate.common</groupId>
-		    <artifactId>hibernate-commons-annotations</artifactId>
-		    <version>4.0.1.Final</version>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-core</artifactId>
-			<version>4.1.8.Final</version>
-		</dependency>
-
-		<!-- Jersey Container Grizzly2 -->
-		<dependency>
-			<groupId>org.glassfish.jersey.containers</groupId>
-			<artifactId>jersey-container-grizzly2-http</artifactId>
-			<version>${jersey-version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish.jersey.inject</groupId>
-			<artifactId>jersey-hk2</artifactId>
-			<version>${jersey-version}</version>
-		</dependency>
-			
-        <!-- JODA-Time -->				
-		<dependency>
-		    <groupId>joda-time</groupId>
-		    <artifactId>joda-time</artifactId>
-		    <version>2.3</version>
-		</dependency>
-				
-		<!-- kundera -->
-		<dependency>
-		   <groupId>com.impetus.core</groupId>
-		   <artifactId>kundera-core</artifactId>
-		   <version>2.9</version>
-		 </dependency>
-		 <dependency>
-		   <groupId>com.impetus.client</groupId>
-		   <artifactId>kundera-hbase</artifactId>
-		   <version>2.9</version>
-		 </dependency>
-		 
         <!-- Gson: Java to Json conversion -->
         <dependency>
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
             <version>2.8.5</version>
-        </dependency>		 
-		
-		<!-- Mybatis -->
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis</artifactId>
-			<version>3.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis</groupId>
-			<artifactId>mybatis-spring</artifactId>
-			<version>1.1.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mybatis.generator</groupId>
-			<artifactId>mybatis-generator-core</artifactId>
-			<version>1.3.2</version>
-		</dependency>
+        </dependency>
 
-        <!-- Slf4j/Log4j -->
+        <!-- JUnit -->
         <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-api</artifactId>
-            <version>1.7.5</version>            
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
         </dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.7.5</version>
-		</dependency>
-		<dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.0-beta9</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.17</version>
-        </dependency>
+    </dependencies>
 
-		<!-- Ant -->		
-		<dependency>
-		  <groupId>org.apache.ant</groupId>
-		  <artifactId>ant</artifactId>
-		  <version>1.8.4</version>
-		</dependency>
-
-		<!-- MySQL odbc -->
-		<dependency>
-		  <groupId>mysql</groupId>
-		  <artifactId>mysql-connector-java</artifactId>
-		  <version>5.1.22</version>
-		</dependency>
-
-        <!-- Apache Zooeeper -->
-        <dependency>
-            <groupId>org.apache.zookeeper</groupId>
-            <artifactId>zookeeper</artifactId>
-            <version>3.4.6</version>
-        </dependency>
-
-        <!-- AWS SDK for Java -->
-        <dependency>
-            <groupId>com.amazonaws</groupId>
-            <artifactId>aws-java-sdk</artifactId>
-            <version>1.6.12</version>
-        </dependency>
-
-		<!-- Netty -->
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty-all</artifactId>
-			<version>4.1.33.Final</version>
-		</dependency>
-
-        <!-- QCM -->
-        <dependency>
-            <groupId>com.mitake.o.o-libs</groupId>
-            <artifactId>qcm</artifactId>
-            <version>2.1</version>
-        </dependency>
-
-		<!-- MapDB -->
-		<dependency>
-			<groupId>org.mapdb</groupId>
-			<artifactId>mapdb</artifactId>
-			<version>3.0.5</version>
-		</dependency>
-
-		<!-- JUnit -->
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.11</version>
-		    <scope>test</scope>
-		</dependency>
-	</dependencies>
-  
-	<build>
+    <build>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
-					<source>1.7</source>
-					<target>1.7</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
                     <packagingExcludes>WEB-INF/lib/*.jar</packagingExcludes>
-					<archive>
-						<manifestFile>src/main/webapp/META-INF/MANIFEST.MF</manifestFile>
-						<manifestEntries>
-							<groupId>${project.groupId}</groupId>
-							<artifactId>${project.artifactId}</artifactId>
-							<version>${project.version}</version>
-						</manifestEntries>
-					</archive>	        
+                    <archive>
+                        <manifestFile>src/main/webapp/META-INF/MANIFEST.MF</manifestFile>
+                        <manifestEntries>
+                            <groupId>${project.groupId}</groupId>
+                            <artifactId>${project.artifactId}</artifactId>
+                            <version>${project.version}</version>
+                        </manifestEntries>
+                    </archive>
                 </configuration>
                 <version>3.0</version>
             </plugin>
-	    
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-war-plugin</artifactId>
-				<version>2.3</version>
-			</plugin>      
-	    
-			<plugin>
-			    <groupId>org.codehaus.mojo</groupId>
-			    <artifactId>cobertura-maven-plugin</artifactId>
-			    <version>2.5.1</version>
-			    <configuration>
-			        <formats>
-			        	<format>html</format>
-			            <format>xml</format>
-			        </formats>
-			    </configuration>
-			    <executions>
-			        <execution>
-			            <phase>package</phase>
-			            <goals>
-			                <goal>cobertura</goal>
-			            </goals>
-			        </execution>
-			    </executions>
-			</plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>2.3</version>
+            </plugin>
 
             <!-- maven-compiler-plugin -->
             <plugin>
@@ -343,32 +91,6 @@
                 <version>2.6</version>
                 <configuration>
                     <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <!-- Ignore/Execute plugin execution -->
-            <plugin>
-                <groupId>org.eclipse.m2e</groupId>
-                <artifactId>lifecycle-mapping</artifactId>
-                <version>1.0.0</version>
-                <configuration>
-                    <lifecycleMappingMetadata>
-                        <pluginExecutions>
-                            <!-- copy-dependency plugin -->
-                            <pluginExecution>
-                                <pluginExecutionFilter>
-                                    <groupId>org.apache.maven.plugins</groupId>
-                                    <artifactId>maven-dependency-plugin</artifactId>
-                                    <versionRange>[1.0.0,)</versionRange>
-                                    <goals>
-                                        <goal>copy-dependencies</goal>
-                                    </goals>
-                                </pluginExecutionFilter>
-                                <action>
-                                    <ignore />
-                                </action>
-                            </pluginExecution>
-                        </pluginExecutions>
-                    </lifecycleMappingMetadata>
                 </configuration>
             </plugin>
             <!-- maven-jar-plugin -->
@@ -406,19 +128,23 @@
                 </executions>
             </plugin>
         </plugins>
-	</build>
-  
+    </build>
+
     <repositories>
-	    <repository>
-            <id>root</id>
-            <name>Maven US Central Repository.</name>
-            <url>http://repo.maven.apache.org/maven2</url>
-	    </repository>
+        <repository>
+            <id>default</id>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+
+        <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
 
         <repository>
             <id>local.project</id>
             <name>mitake</name>
             <url>file:${project.basedir}/libs</url>
         </repository>
-	</repositories>  
+    </repositories>
 </project>
