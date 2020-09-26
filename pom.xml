@@ -13,6 +13,18 @@
     </properties>
 
     <dependencies>
+        <!-- Google Protocol Buffer -->
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.11.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>3.11.0</version>
+        </dependency>
+
         <!-- Jersey Container Grizzly2 -->
         <dependency>
             <groupId>org.glassfish.jersey.containers</groupId>
