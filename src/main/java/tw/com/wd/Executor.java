@@ -1,131 +1,66 @@
 package tw.com.wd;
 
 
-import com.google.gson.Gson;
-
-import java.util.List;
-import java.util.Map;
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.Base64;
 
 
 public class Executor {
-    public static void main(String[] args) {
-//        Domain domain = new Domain();
-//        Domain domain2 = new Domain();
-//
-//        domain.setS("<p>test</p>?q=123");
-//        domain.setD(1.23f);
-//        domain.setI(456);
-//        domain.setL(789L);
-//        domain.setSs(new String[] {"A", "B", "C"});
-//
-//        domain2.setS("<p>test</p>?q=123");
-//        domain2.setD(1.23f);
-//        domain2.setI(456);
-//        domain2.setL(789L);
-//        domain2.setSs(new String[] {"A", "B", "C"});
-//
-//        List<String> sList = new ArrayList<>();
-//        sList.add("Q");
-//        sList.add("W");
-//        sList.add("E");
-//        domain.setsList(sList);
-//        domain2.setsList(sList);
-//
-//        Map<String, String> sMap = new HashMap<>();
-//        sMap.put("K1", "V1");
-//        sMap.put("K2", "V2");
-//        sMap.put("K3", "V3");
-//        domain.setsMap(sMap);
-//        domain2.setsMap(sMap);
-//
-//        System.out.println(new GsonBuilder().create().toJson(domain));
-//        System.out.println(new GsonBuilder().disableHtmlEscaping().create().toJson(domain));
-//        System.out.println(new GsonBuilder().disableHtmlEscaping().create().toJson(domain));
-//        System.out.println(new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(domain));
-//        System.out.println(new GsonBuilder().disableHtmlEscaping().setPrettyPrinting().create().toJson(domain));
-//
-//        List<Domain> domainList = new ArrayList<>();
-//        domainList.add(domain);
-//        domainList.add(domain2);
-//
-//        System.out.println(new Gson().toJson(domainList));
+    public static void main(String[] args) throws Exception {
+        String key = "mitake_86136982";
+        String srcData = "GxxCby05Fcbkd+F0HYWYY7oiAIGCz6+e6nI4Yp0lC8o=";
+        // AES encode
 
-        String json = "{\"s\":123,\"l\":789,\"i\":456,\"d\":1.2300000190734863,\"ss\":[\"A\",\"B\",\"C\"],\"sList\":[\"Q\",\"W\",\"E\"],\"sMap\":{\"K1\":\"V1\",\"K2\":\"V2\",\"K3\":\"V3\"}}";
-        String json2= "{\"s\":123,\"l\":789,\"i\":456,\"d\":1.2300000190734863,\"ss\":[\"A\",\"B\",\"C\"],\"ssList\":\"ssList\",\"sListE\":\"sListE\",\"sMap\":{\"K1\":\"V1\",\"K2\":\"V2\",\"K3\":\"V3\"}}";
 
-        System.out.println("JSON: " + json);
-        Domain domain3 = new Gson().fromJson(json, Domain.class);
-        System.out.println(domain3.getS());
-
-        System.out.println("JSON: " + json2);
-        Domain domain4 = new Gson().fromJson(json2, Domain.class);
-        System.out.println(domain4.getsList());
-        System.out.println(domain4.getsMap().get("K1"));
+        // AES decode
+        decodeByAES();
+        return;
     }
 
-    public static class Domain {
-        private String s;
-        private Long l;
-        private Integer i;
-        private Double d;
-        private String[] ss;
-        private List<String> sList;
-        private Map<String, String> sMap;
+    public static void encodeByAES() throws Exception {
+        // AES encode
+        String key = "mitake_86136982";
+        byte[] keyBytes = Arrays.copyOf(key.getBytes(Charset.forName("UTF-8")), 16);
+        String srcData = "GxxCby05Fcbkd+F0HYWYY7oiAIGCz6+e6nI4Yp0lC8o=";
+        byte[] srcDataBytes = srcData.getBytes(Charset.forName("UTF-8"));
+        byte[] encodedBytes = null;
 
-        public String getS() {
-            return s;
-        }
+        SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
 
-        public void setS(String s) {
-            this.s = s;
-        }
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.ENCRYPT_MODE, secretKeySpec);
+        encodedBytes = cipher.doFinal(srcDataBytes);
 
-        public long getL() {
-            return l;
-        }
 
-        public void setL(long l) {
-            this.l = l;
-        }
+        byte[] base64EncodedByte = Base64.getEncoder().encode(encodedBytes);
 
-        public int getI() {
-            return i;
-        }
+        String base64EncodedString = new String(base64EncodedByte);
 
-        public void setI(int i) {
-            this.i = i;
-        }
+        System.out.println(base64EncodedString);
+        System.out.println(base64EncodedString.equals("tDiqktzSoXTkmfejIM9sdjEdREQZBpNWbFcad3Tx+6TTBASYwc8bpf2I85H/8y7j"));
+    }
 
-        public double getD() {
-            return d;
-        }
+    public static void decodeByAES() throws Exception {
+        // AES encode
+        String key = "mitake_86136982";
+        byte[] keyBytes = Arrays.copyOf(key.getBytes(Charset.forName("UTF-8")), 16);
+        String base64EncodedString = "tDiqktzSoXTkmfejIM9sdjEdREQZBpNWbFcad3Tx+6TTBASYwc8bpf2I85H/8y7j";
+        byte[] base64EncodedBytes = base64EncodedString.getBytes(Charset.forName("UTF-8"));
+        byte[] encodedBytes = null;
+        byte[] decodedBytes = null;
 
-        public void setD(double d) {
-            this.d = d;
-        }
+        encodedBytes = Base64.getDecoder().decode(base64EncodedString);
 
-        public String[] getSs() {
-            return ss;
-        }
+        SecretKeySpec secretKeySpec = new SecretKeySpec(keyBytes, "AES");
+        Cipher cipher = Cipher.getInstance("AES");
+        cipher.init(Cipher.DECRYPT_MODE, secretKeySpec);
+        decodedBytes = cipher.doFinal(encodedBytes);
+        String decodeData = new String(decodedBytes);
 
-        public void setSs(String[] ss) {
-            this.ss = ss;
-        }
-
-        public List<String> getsList() {
-            return sList;
-        }
-
-        public void setsList(List<String> sList) {
-            this.sList = sList;
-        }
-
-        public Map<String, String> getsMap() {
-            return sMap;
-        }
-
-        public void setsMap(Map<String, String> sMap) {
-            this.sMap = sMap;
-        }
+        System.out.println(decodeData);
+        System.out.printf("%s\n", decodeData.equals("GxxCby05Fcbkd+F0HYWYY7oiAIGCz6+e6nI4Yp0lC8o="));
     }
 }
